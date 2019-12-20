@@ -4,5 +4,15 @@ from gameplay.models import Game
 
 
 def home(request):
-    view_data = {'ngames': Game.objects.count()}
-    return render(request, "player/home.html", view_data)
+	game_first_player = Game.objects.filter(
+		first_player=request.user,
+		status='F'
+		)
+	game_second_player = Game.objects.filter(
+		second_player=request.user,
+		status='S'
+		)
+
+	all_my_games = list(game_first_player) + list(game_second_player)
+	view_data = {'games':all_my_games}
+	return render(request, "player/home.html", view_data)
