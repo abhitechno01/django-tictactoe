@@ -16,6 +16,6 @@ class MoveForm(ModelForm):
         try:
             if game.board()[y][x] is not None:
                 raise ValidationError("Square is not empty")
-            except IndexError:
-                raise ValidationError("Invalid coordinates")
-            return self.cleaned_data
+        except IndexError:
+            raise ValidationError("Invalid coordinates")
+        return self.cleaned_data
