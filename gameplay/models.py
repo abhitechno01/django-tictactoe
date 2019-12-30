@@ -42,7 +42,7 @@ class Game(models.Model):
     objects = GamesQuerySet.as_manager()
 
     def board(self):
-        board = [None for x in range(BOARD_SIZE) for y in range(BOARD_SIZE)]
+        board = [[None for x in range(BOARD_SIZE)] for y in range(BOARD_SIZE)]
         for move in self.move_set.all():
             board[move.y][move.x] = move
         return board
